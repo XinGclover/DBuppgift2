@@ -23,20 +23,7 @@ import shoestore.modell.Shoe;
  */
 public class Controller {
    Repository repo= new Repository();
-         
-//    public Customer checkLogin (String username,String password){
-//        Map<Integer,Customer> customerMap=repo.getAllCustomers().stream()
-//                .collect(Collectors.toMap(Customer::getId,Customer->Customer));
-//        for(Integer key:customerMap.keySet()){
-//            if(customerMap.get(key).getFirstname().equals(username.trim())){
-//                if(customerMap.get(key).getPassword().equals(password.trim()))
-//                    return customerMap.get(key);
-//                }
-//                else
-//                   JOptionPane.showMessageDialog(null,"Invalid Login Details","Login Error",JOptionPane.ERROR_MESSAGE);
-//        }
-//       return null;
-//}
+        
      
     public Customer checkLogin (String username,String password){
        List<Customer> customers=repo.getAllCustomers();
