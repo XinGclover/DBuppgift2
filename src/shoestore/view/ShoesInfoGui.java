@@ -28,19 +28,7 @@ public class ShoesInfoGui extends javax.swing.JFrame {
      */
     public ShoesInfoGui() {
         initComponents();
-//        Controller con=new Controller();
-//        for(Category ca:con.addCategoriesItems()){
-//            jComboBox5.addItem(ca.getName());
-//        }
-//        for(Brand br:con.addBrandsItems()){
-//            jComboBox1.addItem(br.getName());
-//        }
-//        for(Color co:con.addColorsItems()){
-//            jComboBox3.addItem(co.getName());
-//        }
-//        jComboBox5.setSelectedIndex(-1);
-//        jComboBox1.setSelectedIndex(-1);
-//        jComboBox3.setSelectedIndex(-1);
+
     }
     public ShoesInfoGui(Customer c){
         initComponents();
@@ -48,16 +36,16 @@ public class ShoesInfoGui extends javax.swing.JFrame {
         this.customer=c;
         
         Controller con=new Controller();
-        for(Category ca:con.addCategoriesItems()){
-            jComboBox5.addItem(ca.getName());
+        for(Integer key:con.addCategoriesItems().keySet()){
+            jComboBox5.addItem(con.addCategoriesItems().get(key).getName());
         }        
-        for(Brand br:con.addBrandsItems()){
-            jComboBox1.addItem(br.getName());
-        }
+        for(Integer key:con.addBrandsItems().keySet()){
+            jComboBox1.addItem(con.addBrandsItems().get(key).getName());
+        }  
         
-        for(Color co:con.addColorsItems()){
-            jComboBox3.addItem(co.getName());
-        }
+         for(Integer key:con.addColorsItems().keySet()){
+            jComboBox3.addItem(con.addColorsItems().get(key).getName());
+        }  
         jComboBox5.setSelectedIndex(-1);
         jComboBox1.setSelectedIndex(-1);
         jComboBox3.setSelectedIndex(-1);
@@ -224,10 +212,7 @@ public class ShoesInfoGui extends javax.swing.JFrame {
                 + "\t  Brand  \t  Category");
         for(Shoe s: selectedShoes){
             dlm.addElement(s.ShoeInfo());
-        }
-//        dlm.addElement(jComboBox5.getSelectedItem().toString());
-//        dlm.addElement(jComboBox1.getSelectedItem().toString());
-//        dlm.addElement(jComboBox3.getSelectedItem().toString());
+        }  
 
         jList1.setModel(dlm);               // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

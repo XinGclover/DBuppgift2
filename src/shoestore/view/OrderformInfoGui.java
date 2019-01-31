@@ -6,6 +6,7 @@ Java18-OOJ
 package shoestore.view;
 
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import shoestore.Controller;
@@ -26,6 +27,7 @@ public class OrderformInfoGui extends javax.swing.JFrame {
     List<Orderform> orderformsforCustomer;
     List<Orderform> selectedOrderforms;
     List<Shoe> selectedShoes;
+    
     /** Creates new form OrderformInfo */
     public OrderformInfoGui() {
         initComponents();
@@ -130,7 +132,7 @@ public class OrderformInfoGui extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(145, 145, 145)
                         .add(jLabel1))
@@ -147,16 +149,16 @@ public class OrderformInfoGui extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(29, 29, 29)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 562, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(layout.createSequentialGroup()
                                 .add(jButton5)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(46, 46, 46)
                                 .add(jButton1)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(48, 48, 48)
                                 .add(jButton4)
-                                .add(40, 40, 40)
-                                .add(jButton3))
-                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 444, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                                .add(53, 53, 53)
+                                .add(jButton3)))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -172,13 +174,13 @@ public class OrderformInfoGui extends javax.swing.JFrame {
                     .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(50, 50, 50)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 138, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 40, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
                     .add(jButton3)
-                    .add(jButton4)
-                    .add(jButton5))
+                    .add(jButton5)
+                    .add(jButton1)
+                    .add(jButton4))
                 .add(36, 36, 36))
         );
 
@@ -190,6 +192,8 @@ public class OrderformInfoGui extends javax.swing.JFrame {
         con.AddToCart(customer, selectedOrderforms.get(selectedOrderformindex-1).getId(),
                       selectedShoes.get(selectedShoeindex-1).getId());
         JOptionPane.showMessageDialog(null, "Thank you for your order.");
+        System.out.println("shoeId "+selectedShoes.get(selectedShoeindex-1).getId());
+        System.out.println("orderformId "+selectedOrderforms.get(selectedOrderformindex-1).getId());
       
          // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -209,10 +213,13 @@ public class OrderformInfoGui extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         selectedOrderforms=con.showSelectedOrderforms(jComboBox1.getSelectedItem().toString(), 
                 jComboBox2.getSelectedItem().toString(), customer);
+       
+        
         DefaultListModel dlm=new DefaultListModel();
         dlm.addElement(" Order Date  \t  Ship City  \t  Shoe Information");
         for(Orderform orf:selectedOrderforms){
             dlm.addElement(orf.printOrderform());
+
         }
         jList1.setModel(dlm);// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed

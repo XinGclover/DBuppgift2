@@ -5,6 +5,7 @@ Java18-OOJ
 package shoestore;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,8 +23,22 @@ import shoestore.modell.Shoe;
  */
 public class Controller {
    Repository repo= new Repository();
-   
-   public Customer checkLogin (String username,String password){
+         
+//    public Customer checkLogin (String username,String password){
+//        Map<Integer,Customer> customerMap=repo.getAllCustomers().stream()
+//                .collect(Collectors.toMap(Customer::getId,Customer->Customer));
+//        for(Integer key:customerMap.keySet()){
+//            if(customerMap.get(key).getFirstname().equals(username.trim())){
+//                if(customerMap.get(key).getPassword().equals(password.trim()))
+//                    return customerMap.get(key);
+//                }
+//                else
+//                   JOptionPane.showMessageDialog(null,"Invalid Login Details","Login Error",JOptionPane.ERROR_MESSAGE);
+//        }
+//       return null;
+//}
+     
+    public Customer checkLogin (String username,String password){
        List<Customer> customers=repo.getAllCustomers();
        for(Customer c:customers){
            if(username.equals(c.getFirstname())){
@@ -36,42 +51,33 @@ public class Controller {
        }
        return null;
    }
-   
+    
    public List<Orderform> addOrderformsforCustomer(Customer c){
        List<Orderform> unexpeditedorderforms=repo.getOrderformsforCustomerbyCustomer(c.getId()).
                stream().filter(o->o.getExpedited()==0).collect(Collectors.toList());      
        return unexpeditedorderforms;
    }
 
+
    
-   public List<Category> addCategoriesItems(){
-       List<Category> categorys=repo.getAllCategories();
-       return categorys;
+    public Map<Integer,Category> addCategoriesItems(){
+       Map<Integer,Category> categorysMap=repo.getAllCategories().stream()
+                .collect(Collectors.toMap(Category::getId,Category->Category));;
+       return categorysMap;
    }
    
-   public List<Brand> addBrandsItems(){
-       List<Brand> brands=repo.getAllBrands();
-       return brands;
+   public Map<Integer,Brand> addBrandsItems(){
+       Map<Integer,Brand> brandsMap=repo.getAllBrands().stream()
+                .collect(Collectors.toMap(Brand::getId,Brand->Brand));;
+       return brandsMap;
    }
    
-   public List<Color> addColorsItems(){
-       List<Color> colors=repo.getAllColors();
-       return colors;
+   public Map<Integer,Color> addColorsItems(){
+       Map<Integer,Color> colorsMap=repo.getAllColors().stream()
+                .collect(Collectors.toMap(Color::getId,Color->Color));;
+       return colorsMap;
    }
-   
-//   public List<Shoe> showSelectedShoes(String categoryname,String brandname,String colorname){
-//       List<Shoe> compliantShoes = new LinkedList<>();
-//       for(Shoe s:repo.getAllShoes()){
-//           if(categoryname.equals(s.getCategory().getName()) 
-//              && brandname.equals(s.getBrand().getName())
-//              && colorname.equals(s.getColor().getName())
-//              && s.getStockNumber()>0){
-//              compliantShoes.add(s);
-//           }
-//       }
-//       return compliantShoes;
-//   }
-//   
+      
    public List<Shoe> showSelectedShoes(String categoryname,String brandname,String colorname){
        List<Shoe> compliantShoes = repo.getAllShoes().stream().
                      filter(s->categoryname.equals(s.getCategory().getName()) 
@@ -82,16 +88,11 @@ public class Controller {
        return compliantShoes;
    }
    
-//   public List<Orderform> showSelectedOrderforms(String date,String cityname,Customer customer){
-//       List<Orderform> compliantOrderforms = new LinkedList<>();
-//       for(Orderform o:repo.getOrderformsforCustomerbyCustomer(customer.getId())){
-//           if(date.equals(o.getOrderdate().toString())
-//              && cityname.equals(o.getCity())){
-//              compliantOrderforms.add(o);
-//           }
-//       }
-//       return compliantOrderforms;
-//   }
+    public Map<Integer,Shoe> getAllInstockShoeMap(){
+        return repo.getAllShoes().stream().filter(s->s.getStockNumber()>0).
+                collect(Collectors.toMap(Shoe::getId, Shoe->Shoe));
+
+    }
    
     public List<Orderform> showSelectedOrderforms(String date,String cityname,Customer customer){
        List<Orderform> compliantOrderforms = repo.getOrderformsforCustomerbyCustomer(customer.getId()).
@@ -100,6 +101,7 @@ public class Controller {
               
        return compliantOrderforms;
    }
+   
    
    
    public void AddToCart(Customer c,int orderformid,int shoeid){

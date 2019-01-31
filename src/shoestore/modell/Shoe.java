@@ -114,7 +114,7 @@ public class Shoe {
     }
 
     public String ShoeInfo() {
-        return name + " \t " + size+"  \t "+price+"  \t "+color.getName() + " \t " + brand.getName() + " \t " + category.getName();
+        return name + "\t" + size+"\t"+price+"\t"+color.getName() + "\t" + brand.getName() + "\t" + category.getName();
     }
     
     

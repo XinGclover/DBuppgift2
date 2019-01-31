@@ -15,7 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import shoestore.modell.Category;
 import shoestore.modell.Color;
@@ -76,7 +78,7 @@ public class Repository {
         }
         return categories; 
     }
-    
+       
     public List<Brand> getAllBrands(){
          List<Brand> brands = new ArrayList<>();
         String query="select * from brand;";
@@ -149,32 +151,7 @@ public class Repository {
         }
         return shoes; 
     }
-    
-    
-//    public Map<Shoe,Integer> getShoesMapforOrderformbyOrderformId(int orderformId){
-//        Map<Shoe,Integer> shoesOrder=new HashMap<>();
-//        ResultSet rs =null;
-//        String query="select shoeId,shoeQuantity from orderItems "
-//                + "where orderformId= ? ;";
-//        
-//        try (Connection con = DriverManager.getConnection(p.getProperty("connectionString"),
-//                             p.getProperty("username"),
-//                             p.getProperty("password"));
-//            PreparedStatement stmt = con.prepareStatement(query);){
-//            stmt.setInt(1, orderformId);
-//            rs = stmt.executeQuery();
-//            while (rs.next()) {
-//               Shoe temp=new Shoe(rs.getInt("shoeId"));
-//               shoesOrder.put(temp, rs.getInt("shoeQuantity"));
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return shoesOrder;
-//    }
-    
-    
+  
     
     public List<Orderform> getOrderformsforCustomerbyCustomer(int customerId){
         List<Orderform> orderforms = new ArrayList<>();
@@ -198,7 +175,7 @@ public class Repository {
                temp.setCustomerId(rs.getInt("customerId"));
                temp.setCity(rs.getString("city.name"));
                temp.setOrderdate(rs.getString("orderdate"));
-               temp.setShoe(new Shoe(rs.getInt("shoeId")));
+               temp.setShoe(rs.getInt("shoeId"));
                temp.setShoequantity(rs.getInt("shoeQuantity"));
                temp.setExpedited(rs.getInt("expedited"));
                orderforms.add(temp);

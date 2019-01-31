@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -28,21 +29,22 @@ public class Orderform {
     private int shoequantity;
    
     private int expedited;
-
-
+    
+    private Map<Integer,Integer> shoeMap;
+    
     public Orderform() {
     }
 
-    public Orderform(int id, int customerId, String orderdate, String city, int shoeId, int shoequantity, int expedited) {
+    public Orderform(int id, int customerId, String orderdate, String city, int shoeId, int shoequantity) {
         this.id = id;
         this.customerId = customerId;
         this.orderdate = orderdate;
         this.city = city;
         this.shoeId = shoeId;
         this.shoequantity = shoequantity;
-        this.expedited = expedited;
-    }  
-     
+    }
+
+  
 
     public String getOrderdate() {
         return orderdate;
@@ -92,7 +94,7 @@ public class Orderform {
         return shoeId;
     }
 
-    public void setShoe(Shoe shoe) {
+    public void setShoe(int shoeId) {
         this.shoeId = shoeId;
     }
 
@@ -104,9 +106,10 @@ public class Orderform {
     public void setExpedited(int expedited) {
         this.expedited = expedited;
     }
+   
     
     public String printOrderform() {
-        return orderdate + " \t "+ city+" \t "+ shoeId +" \t "+shoequantity;
+        return orderdate + " \t "+ city+" \t "+shoeId+"\t"+shoequantity;
                
     }
 
